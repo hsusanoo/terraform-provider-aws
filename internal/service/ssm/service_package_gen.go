@@ -36,6 +36,12 @@ func (p *servicePackage) EphemeralResources(ctx context.Context) []*inttypes.Ser
 func (p *servicePackage) FrameworkDataSources(ctx context.Context) []*inttypes.ServicePackageFrameworkDataSource {
 	return []*inttypes.ServicePackageFrameworkDataSource{
 		{
+			Factory:  newParametersDataSource,
+			TypeName: "aws_ssm_parameters",
+			Name:     "Parameters",
+			Region:   unique.Make(inttypes.ResourceRegionDefault()),
+		},
+		{
 			Factory:  newPatchBaselinesDataSource,
 			TypeName: "aws_ssm_patch_baselines",
 			Name:     "Patch Baselines",
